@@ -3,34 +3,28 @@ import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
+
 const projects = [
   {
-    title: "CallHQ",
-    category: "Voice AI Calling Platform",
-    tools: "Voice AI, Calling Automation, CRM Integrations",
-    image: "/images/callhq.png",
-    link: "https://callhq.ai",
+    title: "3D Endless Runner",
+    category: "Core Gameplay & Logic",
+    tools: "Unreal Engine, Blueprints Scripting, Game Loop Implementation",
+    image: "/images/runner-game.png", 
+    link: "#",
   },
   {
-    title: "Whatsapp Automation",
-    category: "WABA Application",
-    tools: "WhatsApp Business API, Workflow Automation, Notifications",
-    image: "/images/whatsapp.png",
-    link: "https://whatsapp.callhq.ai",
+    title: "Character Customization",
+    category: "Mesh Swapping & Retargeting",
+    tools: "Character Blueprint, Skeleton Retargeting, Custom 3D Animations",
+    image: "/images/runner-character.png",
+    link: "#",
   },
   {
-    title: "Broki",
-    category: "Real Estate Platform for FnB Industry",
-    tools: "Property Discovery, Lead Management, Marketplace Workflows",
-    image: "/images/broki.png",
-    link: "https://broki.in",
-  },
-  {
-    title: "Orrdr.com",
-    category: "Ecommerce Platform and Mobile App",
-    tools: "Ecommerce, Mobile Experience, Order Management",
-    image: "/images/orrdr.png",
-    link: "https://orrdr.com",
+    title: "Custom UI / HUD Design",
+    category: "User Interface & Experience",
+    tools: "Unreal Motion Graphics (UMG), Score Tracking, Main Menu Layout",
+    image: "/images/runner-ui.png",
+    link: "#",
   },
 ];
 
@@ -64,7 +58,7 @@ const Work = () => {
     <div className="work-section" id="work">
       <div className="work-container section-container">
         <h2>
-          My <span>Work</span>
+          My <span>Featured Projects</span>
         </h2>
 
         <div className="carousel-wrapper">
@@ -107,7 +101,7 @@ const Work = () => {
                           {project.category}
                         </p>
                         <div className="carousel-tools">
-                          <span className="tools-label">Tools & Features</span>
+                          <span className="tools-label">Key Features & Tools</span>
                           <p>{project.tools}</p>
                         </div>
                       </div>

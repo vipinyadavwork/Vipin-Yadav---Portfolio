@@ -10,28 +10,44 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
+  useEffect(() => {
+    if (percent < 100) return;
+
+    const firstTimer = window.setTimeout(() => {
       setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
     }, 600);
-  }
+
+    const secondTimer = window.setTimeout(() => {
+      setIsLoaded(true);
+    }, 1600);
+
+    return () => {
+      window.clearTimeout(firstTimer);
+      window.clearTimeout(secondTimer);
+    };
+  }, [percent]);
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
+    if (!isLoaded) return;
+
+    setClicked(true);
+
+    const timer = window.setTimeout(() => {
+      try {
+        import("./utils/initialFX").then((module) => {
           if (module.initialFX) {
             module.initialFX();
           }
-          setIsLoading(false);
-        }, 900);
+        });
+      } catch {
+        // Ignore and continue so the app can still render.
+      } finally {
+        setIsLoading(false);
       }
-    });
-  }, [isLoaded]);
+    }, 900);
+
+    return () => window.clearTimeout(timer);
+  }, [isLoaded, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;
@@ -45,8 +61,9 @@ const Loading = ({ percent }: { percent: number }) => {
   return (
     <>
       <div className="loading-header">
+       
         <a href="/#" className="loader-title" data-cursor="disable">
-          AM
+          VY
         </a>
         <div className={`loaderGame ${clicked && "loader-out"}`}>
           <div className="loaderGame-container">
@@ -61,9 +78,10 @@ const Loading = ({ percent }: { percent: number }) => {
       </div>
       <div className="loading-screen">
         <div className="loading-marquee">
+          {/* Changed scrolling text to fit Game Development */}
           <Marquee>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
+            <span> Game Developer</span> <span>Unreal Engine Developer</span>
+            <span> Game Developer</span> <span>Unreal Engine Developer</span>
           </Marquee>
         </div>
         <div

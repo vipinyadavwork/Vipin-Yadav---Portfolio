@@ -58,6 +58,8 @@ const WhatIDo = () => {
               />
             </svg>
           </div>
+          
+          {/* Section 1: Game Development */}
           <div
             className="what-content what-noTouch"
             ref={(el) => setRef(el, 0)}
@@ -87,24 +89,27 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>AI & AUTOMATION</h3>
-              <h4>Workflow Intelligence for Organizations</h4>
+              <h3>GAME DEVELOPMENT</h3>
+              <h4>Gameplay Mechanics & Logic</h4>
               <p>
-                AI specialist helping organizations automate workflows—internal ops
-                and customer-facing—so teams ship faster with less manual work.
+                Building interactive 3D gameplay experiences using game engines. 
+                Focusing on solid script logic, fluid character controls, and seamless 
+                user interfaces to create fun, replayable loops.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">LLMs &amp; agents</div>
-                <div className="what-tags">Workflow design</div>
-                <div className="what-tags">RAG &amp; retrieval</div>
-                <div className="what-tags">Evals &amp; guardrails</div>
-                <div className="what-tags">Integrations</div>
-                <div className="what-tags">Product strategy</div>
+                <div className="what-tags">Unreal Engine</div>
+                <div className="what-tags">Blueprints Scripting</div>
+                <div className="what-tags">Gameplay Systems</div>
+                <div className="what-tags">UI/HUD Design</div>
+                <div className="what-tags">Character Logic</div>
+                <div className="what-tags">C++ Basics</div>
               </div>
               <div className="what-arrow"></div>
             </div>
           </div>
+
+          {/* Section 2: 3D & Level Design */}
           <div
             className="what-content what-noTouch"
             ref={(el) => setRef(el, 1)}
@@ -124,21 +129,21 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>BUILD &amp; SCALE</h3>
-              <h4>Shipping AI in Production</h4>
+              <h3>3D & LEVEL DESIGN</h3>
+              <h4>Environment & Customization</h4>
               <p>
-                I build the systems behind it: APIs, data, voice/real-time, and
-                full-stack products—production-ready, not slide decks.
+                Designing real-time 3D environments, handling asset integration, and 
+                setting up custom meshes. Focusing on game feel, lighting layouts, and 
+                optimizing levels for smooth performance.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Python</div>
-                <div className="what-tags">REST &amp; real-time APIs</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Cloud &amp; infra</div>
+                <div className="what-tags">Level Design</div>
+                <div className="what-tags">Real-time Lighting</div>
+                <div className="what-tags">Character Mesh Swapping</div>
+                <div className="what-tags">Asset Optimization</div>
+                <div className="what-tags">Game Optimization</div>
+                <div className="what-tags">Logic Debugging</div>
               </div>
               <div className="what-arrow"></div>
             </div>

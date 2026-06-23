@@ -4,8 +4,19 @@ import { smoother } from "../Navbar";
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  smoother.paused(false);
-  document.getElementsByTagName("main")[0].classList.add("main-active");
+
+  try {
+    if (smoother) {
+      smoother.paused(false);
+    }
+  } catch {
+    // Ignore smoothing errors and continue.
+  }
+
+  const mainElement = document.getElementsByTagName("main")[0];
+  if (mainElement) {
+    mainElement.classList.add("main-active");
+  }
   gsap.to("body", {
     backgroundColor: "#0a0e17",
     duration: 0.5,

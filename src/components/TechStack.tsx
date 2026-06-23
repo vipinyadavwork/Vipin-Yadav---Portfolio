@@ -12,36 +12,47 @@ import {
 } from "@react-three/rapier";
 
 const textureLoader = new THREE.TextureLoader();
-const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+
+// --- GAME DEV & PROGRAMMING LOGOS ---
+const skillItems = [
+  { name: "C++", imageUrl: "/images/cpp.webp.png", position: [-6.2, 2.3, 0] as [number, number, number], scale: 1.1 },
+  { name: "Unreal", imageUrl: "/images/unreal_engine.webp.png", position: [-2.6, 2.8, 0] as [number, number, number], scale: 1.1 },
+  { name: "Blueprints", imageUrl: "/images/blueprints.webp.png", position: [1.2, 2.7, 0] as [number, number, number], scale: 1.1 },
+  { name: "Visual Studio", imageUrl: "/images/visual_studio.webp.webp", position: [5, 2.1, 0] as [number, number, number], scale: 1.1 },
+  { name: "Git", imageUrl: "/images/git.webp.png", position: [-4.8, -0.8, 0] as [number, number, number], scale: 1.05 },
+  { name: "UMG", imageUrl: "/images/unreal_motion.webp.png", position: [-1.1, -1.2, 0] as [number, number, number], scale: 1.05 },
+  { name: "Gameplay", imageUrl: "/images/game_logic.webp.png", position: [2.4, -1, 0] as [number, number, number], scale: 1.05 },
+  { name: "OOP", imageUrl: "/images/oop.webp.png", position: [5.6, -0.9, 0] as [number, number, number], scale: 1.05 },
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
 
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
+const loadTexture = (url: string) => {
+  const texture = textureLoader.load(url);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 8;
+  texture.generateMipmaps = true;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  return texture;
+};
 
-const spheres = [...Array(30)].map(() => ({
-  scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
-}));
+const logoTextures = skillItems.map((item) => loadTexture(item.imageUrl));
+
+const sphereGeometry = new THREE.SphereGeometry(1, 48, 48);
 
 type SphereProps = {
   vec?: THREE.Vector3;
   scale: number;
-  r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
+  position?: [number, number, number];
+  logoTexture?: THREE.Texture;
+  material: THREE.Material;
   isActive: boolean;
 };
 
 function SphereGeo({
   vec = new THREE.Vector3(),
   scale,
-  r = THREE.MathUtils.randFloatSpread,
+  position = [0, 0, 0],
+  logoTexture,
   material,
   isActive,
 }: SphereProps) {
@@ -69,7 +80,7 @@ function SphereGeo({
       linearDamping={0.75}
       angularDamping={0.15}
       friction={0.2}
-      position={[r(20), r(20) - 25, r(20) - 10]}
+      position={position}
       ref={api}
       colliders={false}
     >
@@ -79,14 +90,27 @@ function SphereGeo({
         position={[0, 0, 1.2 * scale]}
         args={[0.15 * scale, 0.275 * scale]}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        scale={scale}
-        geometry={sphereGeometry}
-        material={material}
-        rotation={[0.3, 1, 1]}
-      />
+      <group rotation={[0.3, 1, 1]}>
+        <mesh
+          castShadow
+          receiveShadow
+          scale={scale}
+          geometry={sphereGeometry}
+          material={material}
+        />
+        {logoTexture && (
+          <group>
+            <mesh position={[0, 0, scale * 1.01]} rotation={[0, 0, 0]}>
+              <planeGeometry args={[0.7 * scale, 0.7 * scale]} />
+              <meshBasicMaterial map={logoTexture} transparent toneMapped={false} depthWrite={false} />
+            </mesh>
+            <mesh position={[0, 0, scale * 0.999]} rotation={[0, 0, 0]}>
+              <planeGeometry args={[0.78 * scale, 0.78 * scale]} />
+              <meshBasicMaterial color="#ffffff" transparent opacity={0.06} depthWrite={false} />
+            </mesh>
+          </group>
+        )}
+      </group>
     </RigidBody>
   );
 }
@@ -130,11 +154,17 @@ const TechStack = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
+      
+      // Safe check for your work section or any existing section element
+      const workElem = document.getElementById("work");
+      if (workElem) {
+        const threshold = workElem.getBoundingClientRect().top;
+        setIsActive(scrollY > threshold);
+      } else {
+        setIsActive(true); // Default to true if section isn't found during setup
+      }
     };
+    
     document.querySelectorAll(".header a").forEach((elem) => {
       const element = elem as HTMLAnchorElement;
       element.addEventListener("click", () => {
@@ -151,20 +181,18 @@ const TechStack = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-        })
-    );
-  }, []);
+
+  const sphereMaterial = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#f8f8ff",
+        roughness: 0.28,
+        metalness: 0.18,
+        emissive: "#0f1030",
+        emissiveIntensity: 0.12,
+      }),
+    []
+  );
 
   return (
     <div className="techstack">
@@ -189,11 +217,13 @@ const TechStack = () => {
         <directionalLight position={[0, 5, -4]} intensity={2} />
         <Physics gravity={[0, 0, 0]}>
           <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
+          {skillItems.map((item, i) => (
             <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
+              key={item.name}
+              scale={item.scale}
+              position={item.position}
+              logoTexture={logoTextures[i]}
+              material={sphereMaterial}
               isActive={isActive}
             />
           ))}

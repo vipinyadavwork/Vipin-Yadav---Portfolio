@@ -5,70 +5,63 @@ const Career = () => {
     <div className="career-section section-container">
       <div className="career-container">
         <h2>
-          My career <span>&</span>
-          <br /> experience
+          My Journey <span>&</span>
+          <br /> Education
         </h2>
         <div className="career-info">
           <div className="career-timeline">
             <div className="career-dot"></div>
           </div>
+          
+          {/* Current Status */}
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Co-Founder</h4>
-                <h5>CallHQ.ai</h5>
+                <h4>Aspiring Game Developer</h4>
+                <h5>Looking for Opportunities</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Building CallHQ.ai, a voice AI platform for
-              automating customer calls, support, and conversions.
+              Actively diving deeper into Unreal Engine, mastering game logic, and optimization. 
+              Open for Junior Game Developer roles, testing, or internships where I can contribute 
+              to real-time 3D projects and grow as a professional.
             </p>
           </div>
+
+          {/* Unreal Engine Project Milestone */}
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Adobe</h4>
-                <h5>6+ years · Noida</h5>
+                <h4>Independent Game Dev</h4>
+                <h5>Endless Runner Project (Unreal Engine)</h5>
               </div>
-              <h3>2017–24</h3>
+              <h3>2026</h3>
             </div>
             <p>
-              Senior Lead Software Engineer (Feb 2024 – May 2024). Lead Software
-              Engineer (Feb 2021 – Feb 2024). Software Engineer II (Dec 2017 –
-              Feb 2021): internationalization, globalization, and localization for
-              Adobe Technical Communication Suite; functional and linguistic testing
-              strategy; in-house tooling; collaboration with product and engineering
-              for high-quality localized releases.
+              Built and developed a complete 3D Endless Runner game. Learned core concepts 
+              through tutorials and successfully customized the project by implementing a 
+              custom 3D character mesh, re-structuring character logic, and designing a brand new 
+              User Interface (UI/HUD) inside Unreal Engine.
             </p>
           </div>
+
+          {/* BCA Education */}
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Consultant</h4>
-                <h5>Genpact Headstrong </h5>
+                <h4>BCA (Bachelor of Computer Applications)</h4>
+                <h5>JS University, Shikohabad (U.P.)</h5>
               </div>
-              <h3>2016–17</h3>
+              <h3>2023–26</h3>
             </div>
             <p>
-              Sep 2016 – Nov 2017. Developed and maintained WCF services consumed
-              by the UI; deployment support across environments; NUnit tests and
-              coverage; bug fixes from QA and users; database work.
+              Completed final semester exams. Developed a strong foundation in programming concepts, 
+              logic building, and software fundamentals. Utilized academic duration to self-learn 
+              real-time 3D environments and interactive technologies.
             </p>
           </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Sf Engineer</h4>
-                <h5>Infogain</h5>
-              </div>
-              <h3>2013-16</h3>
-            </div>
-            <p>
-              Software engineering across enterprise projects, contributing to
-              design, development, and delivery of business applications.
-            </p>
-          </div>
+
         </div>
       </div>
     </div>
